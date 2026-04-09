@@ -1,5 +1,8 @@
 package se.lexicon.airesumeevaluator.service;
 
-public class OpenAIService {
-    String
+import se.lexicon.airesumeevaluator.dto.ResumeEvaluationRequest;
+
+public interface OpenAIService {
+
+    String generateApplicationValuation(ResumeEvaluationRequest parameters);
 }
