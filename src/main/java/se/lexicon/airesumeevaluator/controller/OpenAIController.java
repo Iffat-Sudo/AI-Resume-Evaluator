@@ -1,18 +1,23 @@
 package se.lexicon.airesumeevaluator.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import se.lexicon.airesumeevaluator.dto.ResumeEvaluationRequest;
+import se.lexicon.airesumeevaluator.dto.ResumeEvaluationResponse;
+import se.lexicon.airesumeevaluator.service.OpenAIService;
 
 @RestController
-@RequestMapping
+@RequiredArgsConstructor
+@RequestMapping("/api")
 
 public class OpenAIController {
-    @GetMapping
-    public String processSimpleChatQuery(@RequestParam String question) {
-        System.out.println("Question: " + question);
-        return "Answer:"+ question;
+    private final OpenAIService openAIService;
+
+    @PostMapping("/resume")
+    public ResumeEvaluationResponse processResume(@RequestBody @Valid ResumeEvaluationRequest request) {
+        System.out.println("Processing job application " + request);
+        return openAIService.generateApplicationValuation(request);
 
     }
 }

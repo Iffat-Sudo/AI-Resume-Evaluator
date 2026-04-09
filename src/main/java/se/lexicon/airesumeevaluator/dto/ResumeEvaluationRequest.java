@@ -1,5 +1,9 @@
 package se.lexicon.airesumeevaluator.dto;
 
-public record ResumeEvaluationRequest( String jobDescriptionText,
-                                       String resumeText) {
+import jakarta.validation.constraints.NotBlank;
+
+public record ResumeEvaluationRequest(
+       @NotBlank String jobDescriptionText,
+
+       @NotBlank String resumeText) {
 }
